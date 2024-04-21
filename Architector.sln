@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Architector.Console", "src\Architector.Console\Architector.Console.csproj", "{E183B8E4-91CE-4D41-A951-B9EFB2DFD8E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Architector.CommandLine", "src\Architector.Console\Architector.CommandLine.csproj", "{E183B8E4-91CE-4D41-A951-B9EFB2DFD8E5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{EB8C7BF9-1D84-4654-9A70-62AE8CF929CB}"
 EndProject
