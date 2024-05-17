@@ -1,4 +1,4 @@
-﻿namespace TestConsoleApplication
+﻿namespace TestSolution
 {
     internal class Model
     {

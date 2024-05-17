@@ -14,7 +14,8 @@ namespace Architector.CommandLine
             MSBuildWorkspace workspace = MSBuildWorkspace.Create();
 
             // Open the solution.
-            Solution solution = workspace.OpenSolutionAsync("K:\\Git\\Architector\\Architector.sln").Result;
+            Solution solution = await workspace.OpenSolutionAsync("K:\\Git\\Architector\\Architector.sln");
+            Console.WriteLine($"Solution {solution.FilePath} contains {solution.Projects.Count()} projects.");
 
             foreach (var project in solution.Projects)
             {
