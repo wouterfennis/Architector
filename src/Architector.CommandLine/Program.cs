@@ -14,11 +14,19 @@ namespace Architector.CommandLine
             MSBuildWorkspace workspace = MSBuildWorkspace.Create();
 
             // Open the solution.
-            Solution solution = await workspace.OpenSolutionAsync("K:\\Git\\Architector\\Architector.sln");
+            Solution solution = await workspace.OpenSolutionAsync("K:\\Git\\Architector\\tst\\TestSolution\\TestSolution.sln");
             Console.WriteLine($"Solution {solution.FilePath} contains {solution.Projects.Count()} projects.");
 
+            var stringBuilder = new StringBuilder();
             foreach (var project in solution.Projects)
             {
+                stringBuilder.AppendLine("```mermaid");
+                stringBuilder.AppendLine("---");
+                stringBuilder.Append("title: ");
+                stringBuilder.AppendLine(project.Name);
+                stringBuilder.AppendLine("---");
+                stringBuilder.AppendLine("classDiagram");
+
                 var compilation = await project.GetCompilationAsync();
 
                 foreach (var syntaxTree in compilation.SyntaxTrees)
@@ -30,42 +38,38 @@ namespace Architector.CommandLine
 
                     Console.WriteLine(surveyor.ToString());
 
-                    var s = new StringBuilder();
 
-                    s.AppendLine("```mermaid");
-                    s.AppendLine("---");
-                    s.AppendLine("title: Example");
-                    s.AppendLine("---");
-                    s.AppendLine("classDiagram");
 
                     surveyor.Classes.ForEach(classDetails =>
                     {
 
-                        s.AppendLine($"class {classDetails.Identifier}{{");
+                        stringBuilder.AppendLine($"class {classDetails.Identifier}{{");
 
                         classDetails.Fields.ForEach(fd =>
                         {
-                            s.AppendLine($"    -{fd.Declaration.Type} {fd.Declaration.Variables.Single().Identifier}");
+                            stringBuilder.AppendLine($"    -{fd.Declaration.Type} {fd.Declaration.Variables.Single().Identifier}");
                         });
 
                         classDetails.Properties.ForEach(pd =>
                         {
-                            s.AppendLine($"    +{pd.Type} {pd.Identifier}");
+                            stringBuilder.AppendLine($"    +{pd.Type} {pd.Identifier}");
                         });
 
 
                         classDetails.Methods.ForEach(m =>
                         {
-                            s.AppendLine($"    +{m.Identifier}{m.ParameterList}");
+                            stringBuilder.AppendLine($"    +{m.Identifier}{m.ParameterList}");
                         });
 
-                        s.AppendLine("}");
+                        stringBuilder.AppendLine("}");
                     });
 
-                    Console.WriteLine(s.ToString());
                 }
+
+                stringBuilder.AppendLine("```");
             }
 
+            Console.WriteLine(stringBuilder.ToString());
         }
     }
 }

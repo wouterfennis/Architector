@@ -1,4 +1,4 @@
-﻿namespace TestSolution
+﻿namespace TestProject
 {
     internal class Model
     {

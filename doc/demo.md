@@ -1,11 +1,12 @@
 ```mermaid
 ---
-title: Example
+title: TestProject
 ---
 classDiagram
-class Program{
-    -string _name
+class Model{
     +string Name
+}
+class Program{
     +Main(string[] args)
 }
 ```
